@@ -16,6 +16,9 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                <div class="flex-shrink-0 flex items-center">
+                    <a class="dropdown-item" href="{{ route('products.index') }}">Corsi Attivi</a>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->

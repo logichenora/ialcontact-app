@@ -8,6 +8,13 @@ use Barryvdh\Debugbar\Facade as Debugbar;
 
 class ProductController extends Controller
 {
+
+    public function welcome()
+    {
+        $products = Product::all();
+        return view('welcome', compact('products'));
+    }
+
     /**
      * Display a listing of the resource.
      *

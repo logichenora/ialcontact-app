@@ -8,6 +8,15 @@
         }
     </style>
 
+    <div class="row">
+        <div class="col-end-4">
+            @if (Route::has('login'))
+                @auth
+                    <a class="dropdown-item" href="{{ route('products.create') }}">Crea Corso</a>
+                @endauth
+            @endif
+        </div>
+    </div>
     <div class="push-top">
         @if(session()->get('success'))
             <div class="alert alert-success">
@@ -33,11 +42,17 @@
                     <td>{{$product->available}}</td>
                     <td class="text-center">
                         <a href="{{ route('products.edit', $product->id)}}" class="btn btn-primary btn-sm">Edit</a>
-                        <form action="{{ route('products.destroy', $product->id)}}" method="post" style="display: inline-block">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger btn-sm" type="submit">Delete</button>
-                        </form>
+                        @if (Route::has('login'))
+                            @auth
+                            <form action="{{ route('products.destroy', $product->id)}}" method="post" style="display: inline-block">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                            </form>
+                            @else
+                                <span></span>
+                            @endauth
+                        @endif
                     </td>
                 </tr>
             @endforeach

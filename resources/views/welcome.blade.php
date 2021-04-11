@@ -15,6 +15,12 @@
         </style>
 
         <style>
+            img{
+                width: 100%;
+            }
+            .p-1{
+                width: 600px;
+            }
             body {
                 font-family: 'Nunito', sans-serif;
             }
@@ -58,8 +64,15 @@
                 @endif
             </div>
         </nav>
-        <div>
-
+        <div class="container">
+            <div class="row">
+            @foreach($products as $product)
+                <div class="col-md-6 col-xl-4">
+                    <h4><a href="{{ route('products.show', $product->id)}}">{{$product->name}}</a></h4>
+                    <a href="{{ route('products.show', $product->id)}}"><img src="{{$product->imageUrl}}"></a>
+                </div>
+            @endforeach
+            </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>

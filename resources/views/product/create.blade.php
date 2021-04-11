@@ -36,7 +36,7 @@
                     <textarea class="form-control" name="description"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="quantity">Quantity</label>
+                    <label for="quantity">Studenti Iscritti</label>
                     <input type="number" class="form-control" name="quantity"/>
                 </div>
                 <div class="form-group form-check">

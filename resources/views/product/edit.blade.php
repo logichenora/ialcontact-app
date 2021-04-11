@@ -5,17 +5,19 @@
     <style>
         .container {
         }
+        img{
+            width: 100%;
+        }
         .push-top {
             margin-top: 50px;
         }
     </style>
 
-    <div class="card push-top">
-        <div class="card-header">
-            Edit & Update
+    <div class="row">
+        <div class="col-4">
+            <img src="{{$product->imageUrl}}">
         </div>
-
-        <div class="card-body">
+        <div class="col-8">
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
