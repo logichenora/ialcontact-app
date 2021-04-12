@@ -23,4 +23,6 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::resource('products', 'App\Http\Controllers\ProductController');
+Route::resource('chatroom', 'App\Http\Controllers\ChatRoomController');
+Route::post('/chat','ChatController@sendMessage');
 require __DIR__.'/auth.php';
