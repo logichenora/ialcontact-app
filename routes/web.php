@@ -24,5 +24,7 @@ Route::get('/dashboard', function () {
 
 Route::resource('products', 'App\Http\Controllers\ProductController');
 Route::resource('chatroom', 'App\Http\Controllers\ChatRoomController');
+Route::resource('bubbolo', 'App\Http\Controllers\StudentController');
+
 Route::post('/chat','ChatController@sendMessage');
 require __DIR__.'/auth.php';
