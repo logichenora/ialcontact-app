@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController as ProductController;
+use App\Http\Controllers\ChatController as ChatController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,5 +27,8 @@ Route::resource('products', 'App\Http\Controllers\ProductController');
 Route::resource('chatroom', 'App\Http\Controllers\ChatRoomController');
 Route::resource('bubbolo', 'App\Http\Controllers\StudentController');
 
-Route::post('/chat','ChatController@sendMessage');
+Route::post('/chat', [ChatController::class, 'sendMessage']);
+
+Route::get('/chat','App\Http\Controllers\ChatController@chatPage');
+
 require __DIR__.'/auth.php';

@@ -7,12 +7,17 @@
             margin-top: 50px;
         }
     </style>
-
+<div id="app">
+    <div class="row">
+        <div class-md-3><span>Ciao {{ Auth::user()->name }}, chatta con:</span></div>
+    </div>
     <div class="row">
         <div class="col-md-2">
             <ul class="list-group">
                 @foreach($users as $chatuser)
+                    @if($chatuser->name !== Auth::user()->name )
                     <li v-on:click="getUserId" class="list-group-item" id="{{ $chatuser->id }}" value="{{ $chatuser->name }}">{{ $chatuser->name }}</li>
+                    @endif
                 @endforeach
 
             </ul>
@@ -29,7 +34,7 @@
                                 <ul class="chat" id="chat">
                                     <li class="left clearfix" v-for="chat in chats[chatWindow.senderid]" v-bind:message="chat.message" v-bind:username="chat.username">
                        <span class="chat-img pull-left">
-                       <img src="https://placehold.it/50/55C1E7/fff&amp;text=U" alt="User Avatar" class="img-circle">
+                       <img src="http://placehold.it/50/55C1E7/fff&amp;text=U" alt="User Avatar" class="img-circle">
                        </span>
                                         <div class="chat-body clearfix">
                                             <div class="header">
@@ -42,8 +47,8 @@
                             </div>
                             <div class="panel-footer">
                                 <div class="input-group">
-                                    <input :id="chatWindow.senderid" v-model="chatMessage[chatWindow.senderid]" v-on:keyup.enter="sendMessage2" type="text" class="form-control input-md" placeholder="Type your message here..." />
-                                    <span class="input-group-btn"><button :id="chatWindow.senderid" class="btn btn-warning btn-md" v-on:click="sendMessage2">
+                                    <input :id="chatWindow.senderid" v-model="chatMessage[chatWindow.senderid]" v-on:keyup.enter="sendMessage" type="text" class="form-control input-md" placeholder="Type your message here..." />
+                                    <span class="input-group-btn"><button :id="chatWindow.senderid" class="btn btn-warning btn-md" v-on:click="sendMessage">
                                Send</button></span>
                                 </div>
                             </div>
@@ -55,39 +60,30 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <form id="myForm" name="myForm" class="form-horizontal" novalidate="">
-                <div><span>{{ Auth::user()->name }}</span></div>
-                <div class="form-group">
-                    <label>Messaggio</label>
-                    <textarea type="text" class="form-control" id="description" name="description"
-                              placeholder="Enter msg..." ></textarea>
+            <label>Messaggio di gruppo</label>
+            <div class="panel-body">
+                <ul class="chat" id="bchat">
+                    <li class="left clearfix" v-for="chat in chats[0]" v-bind:message="chat.message" v-bind:username="chat.username">
+                       <span class="chat-img pull-left">
+                       <img src="http://placehold.it/50/55C1E7/fff&amp;text=U" alt="User Avatar" class="img-circle">
+                       </span>
+                        <div class="chat-body clearfix">
+                            <div class="header">
+                                <strong class="primary-font"> @{{chat.name}}</strong>
+                            </div>
+                            <p>@{{chat.message}}</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="panel-footer">
+                <div class="input-group">
+                    <input :id="0" v-model="chatMessage[0]" v-on:keyup.enter="sendBroadcastMessage" type="text" class="form-control input-md" placeholder="Type your message here..." />
+                    <span class="input-group-btn"><button :id="0" class="btn btn-warning btn-md" v-on:click="sendBroadcastMessage">
+                               Send</button></span>
                 </div>
-            </form>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="btn-save" value="add">Send</button>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-12">
-            <table class="table table-inverse">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                </tr>
-                </thead>
-                <tbody id="chatroom-list" name="chatroom-list">
-                @foreach ($messages as $data)
-                    <tr id="todo{{$data->id}}">
-                        <td>{{$data->id}}</td>
-                        <td>{{$data->user}}</td>
-                        <td>{{$data->description}}</td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
+</div>
 @endsection
